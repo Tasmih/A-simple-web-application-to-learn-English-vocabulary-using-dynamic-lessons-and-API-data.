@@ -21,6 +21,23 @@ const manageSpinner =(status)=>{
 };
 
 
+
+
+
+const loadLesson =()=>{
+  fetch ("https://openapi.programming-hero.com/api/levels/all") // promise of response
+  .then((res) => res.json()) //promise of json data
+  .then((json) => displayLesson(json.data));
+};
+
+const removeActive=()=>{
+const lessonButton =document.querySelectorAll(".lesson-btn")
+//console.log(lessonButton);
+lessonButton.forEach(btn=>btn.classList.remove("active"));
+};
+
+
+
 function loadLevelWord(id) {
     manageSpinner(true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
@@ -44,6 +61,8 @@ function loadLevelWord(id) {
 //     "synonyms": [],
 //     "id": 1
 // }
+
+
 const loadWordDetail =async(id) =>{
     const url = `https://openapi.programming-hero.com/api/word/${id}`;
     console.log(url);
@@ -101,6 +120,13 @@ const displayLevelWord = (words) =>{
         manageSpinner(false);
         return;
     }
+//  {
+//     "id": 107,
+//     "level": 2,
+//     "word": "Talk",
+//     "meaning": "কথা বলা",
+//     "pronunciation": "টক"
+// }
     words.forEach((word) =>{
         console.log(word);
         const card = document.createElement("div");
@@ -120,6 +146,8 @@ const displayLevelWord = (words) =>{
     });
     manageSpinner(false);
 };
+
+
 displayLesson=(lessons)=>{
    //1.get the container & empty
 
